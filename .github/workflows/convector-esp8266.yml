@@ -32,7 +32,7 @@ jobs:
       - name: Disable unsupported legacy PVS static analysis configuration
         # PlatformIO 6.2 rejects check_tool=pvs-studio even when a different
         # environment is selected. Only alter the checkout used by this run.
-        run: sed -i 's/^check_tool = pvs-studio$/;check_tool = pvs-studio/' platformio_special_envs.ini
+        run: sed -i 's/^check_tool = pvs-studio$/check_tool = clangtidy/' platformio_special_envs.ini
 
       - name: Build compact ESP8266 image
         run: pio run -e convector_ESP8266_4M1M
