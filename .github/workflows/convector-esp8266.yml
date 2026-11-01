@@ -39,14 +39,14 @@ jobs:
 
       - name: Check firmware output
         run: |
-          test -s .pio/build/convector_ESP8266_4M1M/firmware.bin
-          ls -lh .pio/build/convector_ESP8266_4M1M/firmware.bin
-          sha256sum .pio/build/convector_ESP8266_4M1M/firmware.bin
+          test -s build_output/bin/ESP_Easy_*_convector_ESP8266_4M1M.bin
+          ls -lh build_output/bin/ESP_Easy_*_convector_ESP8266_4M1M.bin
+          sha256sum build_output/bin/ESP_Easy_*_convector_ESP8266_4M1M.bin
 
       - name: Upload firmware
         uses: actions/upload-artifact@v4
         with:
           name: convector-ESP8266-4M1M
-          path: .pio/build/convector_ESP8266_4M1M/firmware.bin
+          path: build_output/bin/ESP_Easy_*_convector_ESP8266_4M1M.bin
           if-no-files-found: error
           retention-days: 30
