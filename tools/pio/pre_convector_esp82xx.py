@@ -9,7 +9,8 @@ defines = [
     "-DPLUGIN_SET_NONE",
     "-DCONTROLLER_SET_NONE",
     "-DNOTIFIER_SET_NONE",
-    "-DUSES_C002",  # Generic MQTT / Domoticz MQTT controller used for Publish
+    "-DUSES_C005",  # Existing CW MQTT controller: Home Assistant (openHAB) MQTT
+    "-DUSES_C013",  # Existing CW P2P controller (configured but disabled)
     "-DUSES_P003",  # Generic Pulse Counter: fan tachometer
     "-DUSES_P004",  # Dallas: inlet temperature
     "-DUSES_P005",  # DHT22
@@ -22,7 +23,7 @@ defines = [
     "-DFEATURE_PLUGIN_STATS=0",
     "-DFEATURE_CHART_JS=0",
     "-DFEATURE_SETTINGS_ARCHIVE=0",
-    "-DFEATURE_ESPEASY_P2P=0",
+    "-DFEATURE_ESPEASY_P2P=1",
     "-DFEATURE_EXT_RTC=0",
     "-DFEATURE_I2CMULTIPLEXER=0",
     "-DFEATURE_TRIGONOMETRIC_FUNCTIONS_RULES=0",
