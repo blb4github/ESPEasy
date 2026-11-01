@@ -1,0 +1,47 @@
+name: Convector V2 ESP8266 firmware
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - convector-v2-mega-20260720
+    paths:
+      - 'platformio_esp82xx_envs.ini'
+      - 'tools/pio/pre_convector_esp82xx.py'
+      - '.github/workflows/convector-esp8266.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out exact branch
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install PlatformIO
+        run: python -m pip install --upgrade platformio
+
+      - name: Build compact ESP8266 image
+        run: pio run -e convector_ESP8266_4M1M
+
+      - name: Check firmware output
+        run: |
+          test -s .pio/build/convector_ESP8266_4M1M/firmware.bin
+          ls -lh .pio/build/convector_ESP8266_4M1M/firmware.bin
+          sha256sum .pio/build/convector_ESP8266_4M1M/firmware.bin
+
+      - name: Upload firmware
+        uses: actions/upload-artifact@v4
+        with:
+          name: convector-ESP8266-4M1M
+          path: .pio/build/convector_ESP8266_4M1M/firmware.bin
+          if-no-files-found: error
+          retention-days: 30
